@@ -1,0 +1,3 @@
+This project focuses on the criminal activity data that has been obtained and filed by the Louisville Metro Police Department for the year 2021. The data is sourced from: http://data.louisvilleky.gov. This site offers various data sets for the city of Louisville, KY. 
+
+There is a state law surrounding sexual assault cases where the evidence must be submitted to the crime laboratory for processing within 30 days. The question I want to ask: Is LMPD submitting their sexual assault cases in accordance with that law? Since I do not have access to the actual submission dates, a data set will be created for comparison.
