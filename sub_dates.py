@@ -50,14 +50,17 @@ crime_option = 0
 
 while crime_option != 'Q':
     crime_option = raw_crime_data.crime_menu()
-    result = raw_crime_data.set_crime_search(crime_option)
+    
     if crime_option.isalpha():
         crime_option = crime_option.upper()
 
-    print('This offense occurred ', len(raw_crime_data.a_crime), 'times in 2021.')
+    result = raw_crime_data.set_crime_search(crime_option)
 
+    if result == 2:
+        continue
+    elif result == 0:
+        print('This offense occurred', len(raw_crime_data.a_crime), 'times in 2021.')
 #create TIME DELTA column and generate time_delta based on info in DATE REPORTED column
-    if result != -1:
         mylist = []
         for i in range(len(raw_crime_data.a_crime)):
             time_delta = random_day()
@@ -72,8 +75,8 @@ while crime_option != 'Q':
         
             process_delta_for_graph(time_delta)
     #print totals generated from new time data
-        print(">30:", num_above_30)
-        print("<30:", num_30_and_below)
+        print("Cases submitted >30 days:", num_above_30)
+        print("Cases submitted <30 days:", num_30_and_below, "\n")
 
         draw_graph()  
 print('Thanks for your inquiry.')
