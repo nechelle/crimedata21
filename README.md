@@ -8,25 +8,25 @@ Attempts were made to get accurate submission dates from the Crime Laboratory bu
 
 The question I want to answer: Is LMPD submitting their cases in accordance with the law?
 
-## To setup virtual environment:
+### To setup virtual environment:
 
-  ### On Windows run:
+  #### On Windows run:
   `py -m venv env`
-  ### On Unix or MacOs run:
+  #### On Unix or MacOs run:
   `python3 -m venv env`
 
-## To activate virtual environment:
+### To activate virtual environment:
 
-  ### On Windows:
+  #### On Windows:
   `env\Scripts\activate`
 
-  ### On Linux or MacOs:
+  #### On Linux or MacOs:
   `source env/bin/activate`
 
-## To install required packages run:
+### To install required packages run:
   `pip install -r requirements.txt`
 
-## To execute program run:
+### To execute program run:
   `python3 sub_dates.py`
 
 Packages used:
@@ -39,7 +39,7 @@ Modules that need to be installed:
 
 
 
-### Features demonstrated:
+## Features demonstrated:
 #### Category 1:
 - implement a "master loop" console application where the user can repeatedly enter commands/perform actions, including choosing to exit the program.
 
