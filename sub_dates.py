@@ -3,8 +3,10 @@ import random
 import datetime
 import matplotlib.pyplot as plt 
 import raw_crime_data
+import logging
 
-
+logger=logging.getLogger('matplotlib.font_manager').disabled=True
+logging.basicConfig(filename='error.log', filemode='w', level=logging.DEBUG)
 
 num_30_and_below = 0
 num_above_30 = 0
@@ -15,7 +17,6 @@ random.seed(datetime.datetime.now().timestamp())
 
 def random_day():
     global boundary_time
-    random.seed(datetime.datetime.now().timestamp())
     ret_value = random.randint(0, boundary_time)
     boundary_time = random.randint(28, 65)
     
@@ -32,23 +33,24 @@ def process_delta_for_graph(delta):
         num_30_and_below += 1
 
 #create pie chart percentages from time delta totals
-def draw_graph():
+def draw_graph(equal_and_below, above):
     pie_chart_data = []
     pie_chart_labels = []
-    pie_chart_data.append(num_30_and_below)
-    pie_chart_data.append(num_above_30)
-    #pie_chart_labels = ['<= 30', '> 30']
-    #pie_chart_labels = ('<= 30', '> 30')
+    pie_chart_data.append(equal_and_below)
+    pie_chart_data.append(above)
     pie_chart_labels.append('<=30 days')
     pie_chart_labels.append('>30 days')
     plt.pie(pie_chart_data, labels = pie_chart_labels, autopct='%1.2f%%')
     plt.title(raw_crime_data.crime_type + ' Submissions')
     plt.show()
-
+    logging.info("Display pie chart.")
 #create while loop for asking user input
 crime_option = 0
 
 while crime_option != 'Q':
+    num_30_and_below = 0
+    num_above_30 = 0
+
     crime_option = raw_crime_data.crime_menu()
     
     if crime_option.isalpha():
@@ -57,8 +59,12 @@ while crime_option != 'Q':
     result = raw_crime_data.set_crime_search(crime_option)
 
     if result == 2:
+        logging.warning("Quitting the application.")
         continue
+    elif result == -1:
+        logging.error("Entered invalid option.")
     elif result == 0:
+        logging.info("Valid option entered.")
         print('This offense occurred', len(raw_crime_data.a_crime), 'times in 2021.')
 #create TIME DELTA column and generate time_delta based on info in DATE REPORTED column
         mylist = []
@@ -78,5 +84,5 @@ while crime_option != 'Q':
         print("Cases submitted >30 days:", num_above_30)
         print("Cases submitted <30 days:", num_30_and_below, "\n")
 
-        draw_graph()  
+        draw_graph(num_30_and_below, num_above_30)  
 print('Thanks for your inquiry.')
